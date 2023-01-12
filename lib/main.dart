@@ -20,6 +20,9 @@ class MyHomePage extends StatelessWidget {
     Transaction(
         id: "t2", title: "Black Vans", amount: 94.99, date: DateTime.now())
   ];
+  // late String titleInput, amountInput;
+  final titleController = TextEditingController();
+  final amountController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -28,16 +31,52 @@ class MyHomePage extends StatelessWidget {
         title: Text('Flutter App'),
       ),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        // mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Container(
             width: double.infinity,
             height: 100,
-            child: Card(
+            child: const Card(
               color: Colors.blue,
-              child: Text("CHART"),
               elevation: 5,
+              child: Text("CHART"),
+            ),
+          ),
+          Card(
+            elevation: 5,
+            child: Container(
+              padding: EdgeInsets.all(10),
+              child: Column(
+                // crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  TextField(
+                    decoration: InputDecoration(labelText: "Title"),
+                    controller: titleController,
+                    // onChanged: (value) {
+                    //   titleInput = value;
+                    // },
+                  ),
+                  TextField(
+                    decoration: InputDecoration(labelText: "Amount"),
+                    controller: amountController,
+                    // onChanged: (value) {
+                    //   amountInput = value;
+                    // },
+                  ),
+                  TextButton(
+                    child: Text("Add Transaction"),
+                    style: ButtonStyle(
+                      foregroundColor:
+                          MaterialStateProperty.all<Color>(Colors.purple),
+                      // backgroundColor: MaterialStateProperty.all(Colors.green),
+                    ),
+                    onPressed: () {
+                      print(titleController.text);
+                    },
+                  )
+                ],
+              ),
             ),
           ),
           Column(
@@ -46,15 +85,15 @@ class MyHomePage extends StatelessWidget {
                 child: Row(
                   children: [
                     Container(
-                      margin: const EdgeInsets.symmetric(
-                          vertical: 20, horizontal: 15),
-                      padding: const EdgeInsets.all(10),
+                      margin:
+                          EdgeInsets.symmetric(vertical: 20, horizontal: 15),
+                      padding: EdgeInsets.all(10),
                       decoration:
                           BoxDecoration(border: Border.all(color: Colors.red)),
                       child: Text(
                         // tx.amount.toString(),
                         "₵ ${tx.amount}",
-                        style: const TextStyle(
+                        style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
                             color: Colors.purple),
@@ -65,7 +104,7 @@ class MyHomePage extends StatelessWidget {
                       children: [
                         Text(
                           tx.title,
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 25,
                           ),
@@ -73,7 +112,7 @@ class MyHomePage extends StatelessWidget {
                         Text(
                           // tx.date.toString(),
                           DateFormat.yMMMd().format(tx.date),
-                          style: const TextStyle(
+                          style: TextStyle(
                             color: Colors.grey,
                             fontSize: 18,
                           ),
