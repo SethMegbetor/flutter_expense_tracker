@@ -14,10 +14,10 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
-
-final List<Transaction> transactions = [
-  
-];
+  final List<Transaction> transactions = [
+    Transaction(id: "t1", title: "Suits", amount: 34.99, date: DateTime.now()),
+    Transaction(id: "t2", title: "Black Vans", amount: 94.99, date: DateTime.now())
+  ];
 
   @override
   Widget build(BuildContext context) {
