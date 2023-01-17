@@ -12,8 +12,22 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       // title: 'Flutter App',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.purple)
-            .copyWith(secondary: Colors.amber),
+        // colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.purple)
+        //     .copyWith(secondary: Colors.amber),
+        primarySwatch: Colors.purple,
+        accentColor: Colors.amber,
+        fontFamily: "Quicksand",
+        textTheme: ThemeData.light().textTheme.copyWith(
+              headline6: const TextStyle(
+                  fontFamily: "OpenSans",
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18),
+            ),
+        appBarTheme: const AppBarTheme(
+            titleTextStyle: TextStyle(
+                fontFamily: "OpenSans",
+                fontSize: 20,
+                fontWeight: FontWeight.bold)),
       ),
       home: MyHomePage(),
     );
@@ -29,18 +43,18 @@ class _MyHomePageState extends State<MyHomePage> {
   // late String titleInput, amountInput;
 
   final List<Transaction> _userTransactions = [
-    Transaction(
-      id: "t1",
-      title: "Suits",
-      amount: 34.99,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: "t2",
-      title: "Black Vans",
-      amount: 94.99,
-      date: DateTime.now(),
-    ),
+    // Transaction(
+    //   id: "t1",
+    //   title: "Suits",
+    //   amount: 34.99,
+    //   date: DateTime.now(),
+    // ),
+    // Transaction(
+    //   id: "t2",
+    //   title: "Black Vans",
+    //   amount: 94.99,
+    //   date: DateTime.now(),
+    // ),
   ];
 
   void _addNewTransaction(String txTitle, double txAmount) {
@@ -62,8 +76,8 @@ class _MyHomePageState extends State<MyHomePage> {
       builder: (_) {
         return GestureDetector(
           onTap: () {},
-          child: NewTransaction(_addNewTransaction),
           behavior: HitTestBehavior.opaque,
+          child: NewTransaction(_addNewTransaction),
         );
       },
     );
@@ -73,12 +87,15 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // backgroundColor: Colors.red,
-        title: const Text('Personal Expenses'),
+        title: const Text(
+          'Personal Expenses',
+          // style: TextStyle(fontFamily: "Open Sans"),
+        ),
         actions: [
           IconButton(
-              onPressed: () => _startAddNewTransaction(context),
-              icon: Icon(Icons.add))
+            onPressed: () => _startAddNewTransaction(context),
+            icon: const Icon(Icons.add),
+          ),
         ],
       ),
       body: SingleChildScrollView(
