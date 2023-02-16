@@ -3,6 +3,8 @@ import 'package:intl/intl.dart';
 
 import '../models/transaction.dart';
 
+import './chart_bar.dart';
+
 class Chart extends StatelessWidget {
   // const Chart({super.key, required this.recentTransactions});
 
@@ -29,9 +31,15 @@ class Chart extends StatelessWidget {
       print(totalSum);
 
       return {
-        'day': DateFormat.E().format(weekDay).substring(0,2),
+        'day': DateFormat.E().format(weekDay).substring(0, 2),
         'amount': totalSum,
       };
+    });
+  }
+
+  double get totalSpending {
+    return groupedTransactionValues.fold(0.0, (sum, item) {
+      return sum + (item['amount'] as double);
     });
   }
 
@@ -43,7 +51,14 @@ class Chart extends StatelessWidget {
       margin: EdgeInsets.all(20),
       child: Row(
         children: groupedTransactionValues.map((data) {
-          return Text('${data['day']}: ${data['amount']}');
+          // return Text('${data['day']}: ${data['amount']}');
+          return ChartBar(
+            (data['day'] as String),
+            (data['amount'] as double),
+            totalSpending == 0.0
+                ? 0.0
+                : (data['amount'] as double) / totalSpending,
+          );
         }).toList(),
       ),
     );
