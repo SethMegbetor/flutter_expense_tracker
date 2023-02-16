@@ -6,8 +6,9 @@ class TransactionList extends StatelessWidget {
   // const TransactionList({super.key});
 
   final List<Transaction> transactions;
+  final Function deleteTx;
 
-  TransactionList(this.transactions);
+  TransactionList(this.transactions, this.deleteTx);
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +56,7 @@ class TransactionList extends StatelessWidget {
                         child: FittedBox(
                           child: Text(
                             '₵ ${transactions[index].amount}',
-                            style: TextStyle(color: Colors.white),
+                            style: const TextStyle(color: Colors.white),
                           ),
                         ),
                       ),
@@ -66,6 +67,11 @@ class TransactionList extends StatelessWidget {
                     ),
                     subtitle: Text(
                       DateFormat.yMMMd().format(transactions[index].date),
+                    ),
+                    trailing: IconButton(
+                      icon: const Icon(Icons.delete),
+                      color: Colors.red,
+                      onPressed: () => deleteTx(transactions[index].id),
                     ),
                   ),
                 );
