@@ -35,14 +35,28 @@ class TransactionList extends StatelessWidget {
               itemBuilder: (ctx, index) {
                 return Card(
                   elevation: 2,
-                  margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+                  margin: const EdgeInsets.symmetric(
+                    vertical: 8,
+                    horizontal: 8,
+                  ),
                   child: ListTile(
-                    leading: CircleAvatar(
-                      radius: 30,
+                    leading: Container(
+                      height: 40,
+                      width: 60,
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).primaryColor,
+                        shape: BoxShape.rectangle,
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(8),
+                        ),
+                      ),
                       child: Padding(
-                        padding: EdgeInsets.all(10),
+                        padding: const EdgeInsets.all(8),
                         child: FittedBox(
-                          child: Text('₵ ${transactions[index].amount}'),
+                          child: Text(
+                            '₵ ${transactions[index].amount}',
+                            style: TextStyle(color: Colors.white),
+                          ),
                         ),
                       ),
                     ),
